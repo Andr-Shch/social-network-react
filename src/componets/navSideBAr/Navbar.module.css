@@ -1,0 +1,10 @@
+nav{
+    grid-area: nav;
+    background: rgb(221, 193, 224);
+    border-radius: 2px;
+    box-shadow: 1px 1px 5px rgb(157,105,163);
+    
+  }
+  .item{
+      color: #320636;
+  }
