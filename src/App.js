@@ -9,7 +9,10 @@ import Nav from './componets/navSideBAr/NavBar';
 
 
 
-const App = ()=>{
+const App = (props)=>{
+
+  
+
   return (
     <BrowserRouter>
     <div className="app-wrapper">
@@ -17,9 +20,9 @@ const App = ()=>{
      <Nav/>
      <div className="mainZone">
      {/* <MainContent/> */}
-     <Route component = {Dialogs}/>
-     <Route component={MainContent} />
-     <Dialogs/>
+     <Route path='/dialogs' render={()=><Dialogs dialogData={props.appState.dialogData} messageData={ props.appState.messageData}/>}/>
+     <Route path='/profile' component={()=><MainContent postText={props.appState.postText}/>} />
+     
      </div>
     </div>
     </BrowserRouter>

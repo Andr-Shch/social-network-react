@@ -1,4 +1,35 @@
 
 .general{
-    color: blue;
+   height: 100%;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    
+}
+
+.nameList{
+    justify-self: end;
+    border-right: 2px solid black;
+}
+
+.nameList .user{
+    padding: 10px;
+}
+.active{
+    color:  gold;
+    font-weight: 800;
+}
+
+.messages{
+    
+}
+
+.messages .message{
+    padding: 10px;
+}
+
+
+
+textarea {
+	resize: none;
+    
 }

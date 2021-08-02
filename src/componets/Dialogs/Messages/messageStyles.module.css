@@ -1,0 +1,15 @@
+
+.messages{
+margin-left: 50px;
+}
+
+.messages .message{
+    padding: 10px;
+}
+
+
+
+textarea {
+	resize: none;
+    
+}
