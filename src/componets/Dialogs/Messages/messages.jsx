@@ -25,7 +25,7 @@ const Messages = (props) => {
 
           <div className="textSend">
            
-              <textarea placeholder="Type message here" cols="50" rows="5" disabled='disabled'></textarea><br/>
+              <textarea placeholder="Type message here" cols="50" rows="5" ></textarea><br/>
               <button>Send</button>
               </div>
          
