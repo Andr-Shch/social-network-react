@@ -1,3 +1,5 @@
+const add_post = 'ADD-POST';
+const update_post = 'UPDATE-POST-STATE';
 
 
  let store = {
@@ -32,7 +34,7 @@
 
 
   dispatch(action){
-   if(action.type === 'ADD-POST'){
+   if(action.type === add_post){
     let newPost = {
                 id:3,
                 text: this.state.wallInfo.inputText
@@ -40,12 +42,23 @@
            this.state.wallInfo.postText.push(newPost)
            this.state.wallInfo.inputText =''
            this.callSubscruber(this.state)
-   }else if(action.type === 'UPDATE-POST-STATE'){
+
+   }else if(action.type === update_post){
     this.state.wallInfo.inputText = action.newText;
      this.callSubscruber(this.state)
    }
-  }
 
+
+  }//end dispatch
+   
+ }//store end
+ 
+ export const addPostActionCreator=()=>{
+   return {type: add_post}
  }
+ export const updatePostAcCre=(a)=>({
+   type: update_post,
+   newText: a
+ })
 
   export default store

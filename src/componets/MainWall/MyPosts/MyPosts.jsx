@@ -1,4 +1,5 @@
 import React from 'react';
+import { addPostActionCreator, updatePostAcCre } from '../../../redux/state';
 import WallPost from './post/WallPost';
 import './PostsStyle.css'
 
@@ -8,12 +9,12 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
   
     const addPost = () => {
-      props.dispatch({type:'ADD-POST'})
+      props.dispatch(addPostActionCreator())
     }
 
     const onPostChange = () =>{
         let text = newPostElement.current.value;
-        props.dispatch({type:'UPDATE-POST-STATE', newText: text})
+        props.dispatch(updatePostAcCre(text))
     }
 
      return (
