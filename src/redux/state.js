@@ -1,64 +1,85 @@
-const add_post = 'ADD-POST';
-const update_post = 'UPDATE-POST-STATE';
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
- let store = {
-    state : {
-    messageData: [
-        {id:1, message:'Did you see Lady in red?' },
-        {id:2, message:'Be carefull, she is an agent' },
-        {id:3, message:'But she is &#128293;' },
-      
-      ],
-      dialogData: [
-        {id:1, name:'Thomas Anderson' },
-        {id:2, name:'Jhon Smith' },
-        {id:3, name:'Morpheus' },
-        {id:4, name:'The Merovingian' }
-      ],
-      wallInfo:{
-        postText:[{id:1, text:'Hi, I use props for this text'},
-      {id:2, text:'Life would be tragic if it weren’t funny.'} ],
-        inputText: 'New post!'
-      } 
+let store = {
+    _state: {
+        profilePage: {
+            posts: [
+                {id: 1, message: 'Hi, how are you?', likesCount: 12},
+                {id: 2, message: 'It\'s my first post', likesCount: 11},
+                {id: 3, message: 'Blabla', likesCount: 11},
+                {id: 4, message: 'Dada', likesCount: 11}
+            ],
+            newPostText: 'it-kamasutra.com'
+        },
+        dialogsPage: {
+            dialogs: [
+                {id: 1, name: 'Dimych'},
+                {id: 2, name: 'Andrew'},
+                {id: 3, name: 'Sveta'},
+                {id: 4, name: 'Sasha'},
+                {id: 5, name: 'Viktor'},
+                {id: 6, name: 'Valera'}
+            ],
+            messages: [
+                {id: 1, message: 'Hi'},
+                {id: 2, message: 'How is your it-kamasutra?'},
+                {id: 3, message: 'Yo'},
+                {id: 4, message: 'Yo'},
+                {id: 5, message: 'Yo'}
+            ],
+            newMessageBody: ""
+        },
+        sidebar: {}
     },
-    callSubscruber() {
-    console.log('state changed')
-    },
-    getState(){
-     return this.state
-    },
-    subscribe(observer){
-      this.callSubscruber = observer;
+    _callSubscriber() {
+        console.log('State changed');
     },
 
+    getState() {
+        debugger;
+        return this._state;
+    },
+    subscribe(observer) {
+        this._callSubscriber = observer;  // observer
+    },
 
-  dispatch(action){
-   if(action.type === add_post){
-    let newPost = {
-                id:3,
-                text: this.state.wallInfo.inputText
-            }
-           this.state.wallInfo.postText.push(newPost)
-           this.state.wallInfo.inputText =''
-           this.callSubscruber(this.state)
+    dispatch(action) { // { type: 'ADD-POST' }
+        if (action.type === ADD_POST) {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({id: 6, message: body});
+            this._callSubscriber(this._state);
+        }
+    }
+}
 
-   }else if(action.type === update_post){
-    this.state.wallInfo.inputText = action.newText;
-     this.callSubscruber(this.state)
-   }
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const updateNewPostTextActionCreator = (text) =>
+    ({type: UPDATE_NEW_POST_TEXT, newText: text })
 
+export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+export const updateNewMessageBodyCreator = (body) =>
+    ({ type: UPDATE_NEW_MESSAGE_BODY, body: body })
 
-  }//end dispatch
-   
- }//store end
- 
- export const addPostActionCreator=()=>{
-   return {type: add_post}
- }
- export const updatePostAcCre=(a)=>({
-   type: update_post,
-   newText: a
- })
-
-  export default store
+export default store;
+window.store = store;
+// store - OOP

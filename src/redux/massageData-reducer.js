@@ -1,3 +1,0 @@
-const wallInfoReducer =(state, action) =>{
-    
-}
