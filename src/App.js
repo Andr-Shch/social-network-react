@@ -24,8 +24,8 @@ const App = (props)=>{
      <Route path='/dialogs' render={()=><Dialogs dialogData={props.appState.dialogData} messageData={ props.appState.messageData}/>}/>
      <Route path='/profile' render={()=><MainContent 
                                              wallInfo={props.appState.wallInfo}
-                                             addPost={props.addPost}
-                                             textChanger={props.textChanger}/>} />
+                                             dispatch={props.dispatch}
+                                             />} />
      
      </div>
     </div>

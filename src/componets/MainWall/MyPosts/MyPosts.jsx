@@ -4,26 +4,19 @@ import './PostsStyle.css'
 
 const MyPosts = (props) => {
       
-
- 
     let createPost = props.wallInfo.postText.map( text1 => <WallPost id ={text1.id} text={text1.text}/>)
-
     let newPostElement = React.createRef();
+  
     const addPost = () => {
-        
-        let text = newPostElement.current.value;
-         props.addPost(text);
-         props.textChanger('')
+      props.dispatch({type:'ADD-POST'})
     }
 
     const onPostChange = () =>{
         let text = newPostElement.current.value;
-        props.textChanger(text)
+        props.dispatch({type:'UPDATE-POST-STATE', newText: text})
     }
 
-    
-    return (
-        
+     return (
             <div className="posts">
             <div className="Input post">
                 <input
@@ -35,7 +28,6 @@ const MyPosts = (props) => {
                     /> 
                 <button onClick = {addPost}>Add Post</button>
             </div>
-             {/* <WallPost /> */}
              {createPost}
             </div>
         

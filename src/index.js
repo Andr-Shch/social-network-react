@@ -13,7 +13,7 @@ import store from './redux/state';
 
 
 
-  let el = <App appState = {store.state} addPost={store.addPost.bind(store)} textChanger={store.textChanger.bind(store)} />;
+  let el = <App appState = {store.getState()} dispatch={store.dispatch.bind(store)}  />;
   
   ReactDOM.render(
   el,
@@ -21,9 +21,9 @@ import store from './redux/state';
   );
   
   }
+  
+  renderEntireTree(store.getState())
   store.subscribe(renderEntireTree)
-  renderEntireTree(store.state)
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

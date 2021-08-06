@@ -9,8 +9,7 @@ const MainContent = (props) => {
         <div className='mainContent'>
             <ProfInfo/>
             <MyPosts  wallInfo={props.wallInfo} 
-                      addPost={props.addPost}
-                      textChanger={props.textChanger}/>
+                      dispatch={props.dispatch}/>
             </div>
         
      

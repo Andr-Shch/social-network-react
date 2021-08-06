@@ -1,7 +1,4 @@
- let renderEntireTree = () => {
-    
 
- }
 
  let store = {
     state : {
@@ -23,28 +20,31 @@
         inputText: 'New post!'
       } 
     },
-    renderEntireTree() {
+    callSubscruber() {
     console.log('state changed')
     },
+    getState(){
+     return this.state
+    },
+    subscribe(observer){
+      this.callSubscruber = observer;
+    },
 
-     addPost (postMessage){
-       
-      let newPost = {
-          id:3,
-          text: postMessage
-      }
-     this.state.wallInfo.postText.push(newPost)
-     
-     this.renderEntireTree(this.state)
 
-   } ,
-   textChanger(newText){
-    this.state.wallInfo.inputText = newText;
-    this.renderEntireTree(this.state)
- },
-  subscribe(observer){
-  this.renderEntireTree = observer;
-}
+  dispatch(action){
+   if(action.type === 'ADD-POST'){
+    let newPost = {
+                id:3,
+                text: this.state.wallInfo.inputText
+            }
+           this.state.wallInfo.postText.push(newPost)
+           this.state.wallInfo.inputText =''
+           this.callSubscruber(this.state)
+   }else if(action.type === 'UPDATE-POST-STATE'){
+    this.state.wallInfo.inputText = action.newText;
+     this.callSubscruber(this.state)
+   }
+  }
 
  }
 
