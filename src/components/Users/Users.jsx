@@ -1,6 +1,8 @@
 import React from "react";
 import userPhoto from '../../assets/images/male.jfif';
 import styles from './users.module.css';
+import {NavLink} from "react-router-dom";
+import Preloader from "../Preloader/preloader";
 
 const Users = (props) =>{
     
@@ -12,17 +14,20 @@ const Users = (props) =>{
     }
 
     return <div>
-        <div>
+           <div>
             { pages.map( p => {
                 return <span className={props.currentPage ===  p && styles.selectedPage }
                 onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
             })}
-        </div>
+           </div>
         {
             props.users.map(u => <div  className={styles.bio} key={u.id}>
             <span >
                 <div>
+                    <NavLink to={'/profile/'+u.id}>
                     <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
+
+                    </NavLink>
                 </div>
                 <div>
                     {u.followed
