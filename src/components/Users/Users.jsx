@@ -19,8 +19,8 @@ const Users = (props) =>{
             })}
         </div>
         {
-            props.users.map(u => <div key={u.id}>
-            <span>
+            props.users.map(u => <div  className={styles.bio} key={u.id}>
+            <span >
                 <div>
                     <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
                 </div>
